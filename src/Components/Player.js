@@ -88,12 +88,14 @@ class Player extends Component {
       );
       i++;
     });
-    td.push(<td key={i++}></td>);
+    if (this.props.isAdmin) {
+      td.push(<td key={i++}></td>);
+    }
     return td;
   };
   render() {
     return (
-      <li className="mb-2">
+      <div className="mb-2 col-md-6">
         <div style={{ height: "40px" }} className="row">
           <div className="col-6">
             <img
@@ -105,35 +107,38 @@ class Player extends Component {
             {this.props.nickName}
           </div>
           {this.props.isAdmin ? (
-          <div className="text-right col-6">
-            <span
-              className="mr-2"
-              onClick={() => this.props.onEdit(this.props.id)}
-            >
-              <i
-                className="fa fa-edit text-warning"
-                style={{ cursor: "pointer" }}
-              ></i>
-            </span>
-            <Modal
-              title="Are you sure you want to remove this item?"
-              button={
-                <span>
-                  <i
-                    className="fa fa-times text-danger"
-                    style={{ cursor: "pointer" }}
-                  ></i>
-                </span>
-              }
-            >
-              <button
-                className="btn btn-danger mr-2 p-3"
-                onClick={() => this.props.onDelete(this.props.id)}
+            <div className="text-right col-6">
+              <span
+                className="mr-2"
+                onClick={() => this.props.onEdit(this.props.id)}
               >
-                Yes
-              </button>
-            </Modal>
-          </div>): ""}
+                <i
+                  className="fa fa-edit text-warning"
+                  style={{ cursor: "pointer" }}
+                ></i>
+              </span>
+              <Modal
+                title="Are you sure you want to remove this item?"
+                button={
+                  <span>
+                    <i
+                      className="fa fa-times text-danger"
+                      style={{ cursor: "pointer" }}
+                    ></i>
+                  </span>
+                }
+              >
+                <button
+                  className="btn btn-danger mr-2 p-3"
+                  onClick={() => this.props.onDelete(this.props.id)}
+                >
+                  Yes
+                </button>
+              </Modal>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="row mt-2">
           <div className="col-12">
@@ -146,7 +151,7 @@ class Player extends Component {
           </div>
         </div>
         <hr />
-      </li>
+      </div>
     );
   }
 }

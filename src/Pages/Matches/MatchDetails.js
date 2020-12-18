@@ -57,7 +57,17 @@ class MatchDetails extends Component {
     this.state.playersData.forEach((e) => {
       if (i >= from && i < to) {
         players.push(
-          <Player isAdmin={this.props.isAdmin} key={i} id={e.id} nickName={e.nickName} pictureURL={e.pictureURL} onStatDelete={this.onStatDelete} onDetails={this.onDetails} onEdit={this.onEdit} onDelete={this.onDelete}/>
+          <Player
+            isAdmin={this.props.isAdmin}
+            key={i}
+            id={e.id}
+            nickName={e.nickName}
+            pictureURL={e.pictureURL}
+            onStatDelete={this.onStatDelete}
+            onDetails={this.onDetails}
+            onEdit={this.onEdit}
+            onDelete={this.onDelete}
+          />
         );
       }
       i++;
@@ -84,29 +94,22 @@ class MatchDetails extends Component {
                     </h3>
                   </div>
                 </div>
-                {this.props.isAdmin ? (<Link
-                  to={
-                    "/matches/" + this.props.match.params.id + "/players/create"
-                  }
-                  className="btn btn-primary p-3 mb-2"
-                >
-                  Add new player
-                </Link>) : ""}
-                
-                <div className="row">
-                  <div className="col-md-6 text-left">
-                    <ul className="pl-0" style={{ listStyle: "none" }}>
-                      {this.getPlayers(0, 5)}
-                    </ul>
-                  </div>
-                  <div className="col-md-6 text-right">
-                    <div className="text-left">
-                      <ul className="pl-0" style={{ listStyle: "none" }}>
-                        {this.getPlayers(5, 99)}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                {this.props.isAdmin ? (
+                  <Link
+                    to={
+                      "/matches/" +
+                      this.props.match.params.id +
+                      "/players/create"
+                    }
+                    className="btn btn-primary p-3 mb-2"
+                  >
+                    Add new player
+                  </Link>
+                ) : (
+                  ""
+                )}
+
+                <div className="row">{this.getPlayers()}</div>
               </div>
             </div>
           )}
